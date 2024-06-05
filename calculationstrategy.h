@@ -5,30 +5,34 @@
 #include <QMap>
 #include <QString>
 #include <iostream>
+#include <QFileInfo>
+#include <QFileInfoList>
 
 class CalculationStrategy
 {
 public:
     ~CalculationStrategy() = default;
-    virtual void calculationMethod(QMap<QString, int>& map, const QString& core) = 0;
+    virtual QMap<QString, qint64> calculationMethod(const QString &path) const = 0;
 };
 
 class ByFolder_CalculationStrategy : public CalculationStrategy
 {
 public:
     ~ByFolder_CalculationStrategy() = default;
-    void calculationMethod(QMap<QString, int>& map, const QString& core);
+    virtual QMap<QString, qint64> calculationMethod(const QString &path)const override;
+
 private:
-    int CountDir(const QString& path);
+    int CountFolder(const QString& path);
 };
 
 class ByFileType_CalculationStrategy : public CalculationStrategy
 {
 public:
     ~ByFileType_CalculationStrategy() = default;
-    void calculationMethod(QMap<QString, int>& map, const QString& core);
+    virtual QMap<QString, qint64> calculationMethod(const QString &path)const override;
+
 private:
-    void CountFormat(const QString &path, QMap<QString, int>& memory);
+    void CountFileType(const QString &path, QMap<QString, qint64>& size);
 };
 
 #endif // CALCULATIONSTRATEGY_H
