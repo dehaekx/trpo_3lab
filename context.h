@@ -6,7 +6,7 @@
 
 class context
 {
-    QMap<QString, QString> map;
+    QMap<QString, qint64> map;
 
 public:
     context(const std::shared_ptr<CalculationStrategy> & strategy);
