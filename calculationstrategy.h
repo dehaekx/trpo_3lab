@@ -12,24 +12,31 @@ class CalculationStrategy
 {
 public:
     ~CalculationStrategy() = default;
-    virtual QMap<QString, qint64> calculationMethod(const QString &path) const = 0;
+    virtual void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const = 0;
 };
+
+
+
 
 class Folder_CalculationStrategy : public CalculationStrategy
 {
 public:
     ~Folder_CalculationStrategy() = default;
-    virtual QMap<QString, qint64> calculationMethod(const QString &path)const override;
+     void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const = 0;
 
 private:
-    int CountFolder(const QString& path);
+    qint64 CountFolder(const QString& path);
 };
+
+
+
+
 
 class Type_CalculationStrategy : public CalculationStrategy
 {
 public:
     ~Type_CalculationStrategy() = default;
-    virtual QMap<QString, qint64> calculationMethod(const QString &path)const override;
+     void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const = 0;
 
 private:
     void CountFileType(const QString &path, QMap<QString, qint64>& size) const;
