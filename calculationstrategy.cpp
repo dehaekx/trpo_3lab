@@ -1,6 +1,6 @@
 #include "calculationstrategy.h"
 
-qint64 Folder_CalculationStrategy::CountFolder(const QString &path)
+qint64 Folder_CalculationStrategy::CountFolder(const QString &path) const
 {
     // QMap<QString, qint64> fileTypeSizes;
     // CountFileType(path, fileTypeSizes);
@@ -29,7 +29,7 @@ qint64 Folder_CalculationStrategy::CountFolder(const QString &path)
 
 
 
-void CalculationStrategy::calculationMethod(const QString &path, QMap<QString, qint64> &cont)const
+void Folder_CalculationStrategy::calculationMethod(const QString &path, QMap<QString, qint64> &cont) const
 {
     qint64 result = 0;
 
@@ -60,6 +60,7 @@ void Type_CalculationStrategy::calculationMethod(const QString &path, QMap<QStri
 void Type_CalculationStrategy::CountFileType(const QString &path, QMap<QString, qint64>& size) const
 {
     // Make a checking for path is not emphty
+
     QDir direction = path;
     QFileInfoList fileInfo = direction.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
     QFileInfoList folderInfo = direction.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);

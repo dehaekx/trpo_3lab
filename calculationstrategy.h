@@ -32,7 +32,7 @@ public:
     void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const override;
 
 private:
-    qint64 CountFolder(const QString& path);
+    qint64 CountFolder(const QString& path) const;
 };
 
 
