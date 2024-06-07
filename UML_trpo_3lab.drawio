@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" modified="2024-06-07T09:09:45.275Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 OPR/110.0.0.0 (Edition Yx 08)" etag="qXTxhmSh5iBVMJTKDBC8" version="24.4.13" type="device">
+  <diagram name="Страница — 1" id="qiLK4TDkztnywe2xz11D">
+    <mxGraphModel dx="1515" dy="1794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="P8Ir8QS-Ni-nMBkMkxe2-12" value="context" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="190" y="40" width="430" height="214" as="geometry" />
+        </mxCell>
+        <mxCell id="P8Ir8QS-Ni-nMBkMkxe2-13" value="&lt;div&gt;- strategy_:&amp;nbsp;shared_ptr&amp;lt;CalculationStrategy&amp;gt;&amp;nbsp;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="P8Ir8QS-Ni-nMBkMkxe2-12" vertex="1">
+          <mxGeometry y="26" width="430" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="jec_1_4FBfGysfXx1iB4-3" value="&lt;div&gt;- map:&amp;nbsp;QMap&amp;lt;QString, qint64&amp;gt;&amp;nbsp;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="P8Ir8QS-Ni-nMBkMkxe2-12">
+          <mxGeometry y="52" width="430" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="P8Ir8QS-Ni-nMBkMkxe2-16" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="P8Ir8QS-Ni-nMBkMkxe2-12" vertex="1">
+          <mxGeometry y="70" width="430" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jec_1_4FBfGysfXx1iB4-4" value="+ context(shared_ptr&amp;lt;CalculationStrategy&amp;gt; &amp;amp; strategy = nullptr)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="P8Ir8QS-Ni-nMBkMkxe2-12">
+          <mxGeometry y="100" width="430" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="_tlzQCcqpfX5_RsCwj5b-8" value="+ set_Strategy(shared_ptr&amp;lt;CalculationStrategy&amp;gt;&amp;amp; ): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="P8Ir8QS-Ni-nMBkMkxe2-12" vertex="1">
+          <mxGeometry y="126" width="430" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="jec_1_4FBfGysfXx1iB4-5" value="+ fill_Map(const QString&amp;amp; size): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="P8Ir8QS-Ni-nMBkMkxe2-12">
+          <mxGeometry y="154" width="430" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jec_1_4FBfGysfXx1iB4-7" value="+ get_Map(): QMap&amp;lt;QString, qint64&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="P8Ir8QS-Ni-nMBkMkxe2-12">
+          <mxGeometry y="184" width="430" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P8Ir8QS-Ni-nMBkMkxe2-21" value="CalculationStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="850" y="70" width="440" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="0uPfe_eLFzZHE8ssJK21-6" value="+ calculationMethod(const QString &amp;amp;path, QMap &amp;amp;cont) const: virtual void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="P8Ir8QS-Ni-nMBkMkxe2-21" vertex="1">
+          <mxGeometry y="30" width="440" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="P8Ir8QS-Ni-nMBkMkxe2-26" value="Folder_CalculationStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="540" y="310" width="420" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="_tlzQCcqpfX5_RsCwj5b-9" value="+ calculationMethod(const QString &amp;amp;path, QMap &amp;amp;cont) const: virtual void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="P8Ir8QS-Ni-nMBkMkxe2-26" vertex="1">
+          <mxGeometry y="26" width="420" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="jec_1_4FBfGysfXx1iB4-1" value="- CountFolder(const QString&amp;amp; path) const: qint64" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="P8Ir8QS-Ni-nMBkMkxe2-26">
+          <mxGeometry y="60" width="420" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="_tlzQCcqpfX5_RsCwj5b-15" value="" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;" parent="1" source="P8Ir8QS-Ni-nMBkMkxe2-12" target="P8Ir8QS-Ni-nMBkMkxe2-21" edge="1">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="640" y="170" as="sourcePoint" />
+            <mxPoint x="1062.5" y="-79.99999999999977" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="522" y="-20" />
+              <mxPoint x="1063" y="-20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0uPfe_eLFzZHE8ssJK21-1" value="Type_CalculationStrategy" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="310" width="440" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="0uPfe_eLFzZHE8ssJK21-3" value="+ calculationMethod(const QString &amp;amp;path, QMap &amp;amp;cont) const: virtual void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="0uPfe_eLFzZHE8ssJK21-1" vertex="1">
+          <mxGeometry y="26" width="440" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="jec_1_4FBfGysfXx1iB4-2" value="- CountFileType(const QString &amp;amp;path, QMap&amp;lt;QString, qint64&amp;gt;&amp;amp; size) const: void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="0uPfe_eLFzZHE8ssJK21-1">
+          <mxGeometry y="54" width="440" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0uPfe_eLFzZHE8ssJK21-4" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" parent="1" source="P8Ir8QS-Ni-nMBkMkxe2-26" target="P8Ir8QS-Ni-nMBkMkxe2-21" edge="1">
+          <mxGeometry x="0.0011" width="160" relative="1" as="geometry">
+            <mxPoint x="540" y="230" as="sourcePoint" />
+            <mxPoint x="700" y="230" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0uPfe_eLFzZHE8ssJK21-5" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" parent="1" source="0uPfe_eLFzZHE8ssJK21-1" target="P8Ir8QS-Ni-nMBkMkxe2-21" edge="1">
+          <mxGeometry x="0.0011" width="160" relative="1" as="geometry">
+            <mxPoint x="848" y="320" as="sourcePoint" />
+            <mxPoint x="1005" y="146" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
