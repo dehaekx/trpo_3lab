@@ -6,17 +6,17 @@
 
 class context
 {
-    QMap<QString, qint64> map;
+private:
+    std::shared_ptr<CalculationStrategy> strategy_; // хранит ссылку на одну из стратегий
 
+    QMap<QString, qint64> map;
 public:
-    context(const std::shared_ptr<CalculationStrategy> & strategy);
+    context(const std::shared_ptr<CalculationStrategy> & strategy = nullptr);
     ~context() = default;
 
-    void setStrategy(const std::shared_ptr<CalculationStrategy>& strategy);
+    void set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy);
     void f(const QString& size); // заполнить файл-размер
-    const QMap<QString, qint64>& GetMap();
-private:
-    std::shared_ptr<CalculationStrategy> p;
+    const QMap<QString, qint64>& get_Map();
 };
 
 #endif // CONTEXT_H

@@ -3,20 +3,20 @@
 
 context::context(const std::shared_ptr<CalculationStrategy> &strategy)
 {
-    p = strategy;
+    this->strategy_ = strategy;
 }
 
-void context::setStrategy(const std::shared_ptr<CalculationStrategy>& strategy)
+void context::set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy)
 {
-    p = strategy;
+    this->strategy_ = strategy;
 }
 
-const QMap<QString, qint64> & context::GetMap()
+const QMap<QString, qint64> & context::get_Map()
 {
     return map;
 }
 
 void context::f(const QString& size)
 {
-    p->calculationMethod(size, map);
+    this->strategy_->calculationMethod(size, map);
 }
