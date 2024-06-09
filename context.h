@@ -15,7 +15,7 @@ public:
     ~context() = default;
 
     void set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy);
-    void f(const QString& size); // заполнить файл-размер
+    void fill_Map(const QString& size); // заполнить файл-размер
     const QMap<QString, qint64>& get_Map();
 };
 
