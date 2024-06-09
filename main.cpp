@@ -29,10 +29,14 @@ int main(int argc, char *argv[])
 
 
     context context(std::make_shared<Folder_CalculationStrategy>());
-    context.f(info);
+    context.fill_Map(info);
     print_Map(context.get_Map());
 
+    qDebug() << Qt::endl;
 
+    context.set_Strategy(std::make_shared<Type_CalculationStrategy>());
+    context.fill_Map(info);
+    print_Map(context.get_Map());
 
 
 
