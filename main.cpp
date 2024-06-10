@@ -5,17 +5,105 @@
 #include <QMapIterator>
 #include "context.h"
 
-void print_Map(const QMap<QString, qint64> map)
+void print_Map(const QMap<QString, qint64> &map)
 {
-    if(!map.empty())
+    QTextStream cout(stdout);
+    if (!map.isEmpty())
     {
-        QMapIterator<QString, qint64> i(map);
-        while(i.hasNext())
+        for (auto it = map.constBegin(); it != map.constEnd(); ++it)
         {
-            i.next();
-            qDebug() << i.key() << QString(" - SIZE: ") << QString::number(i.value()) << Qt::endl;
+            cout << it.key() << ": " << it.value() << Qt::endl;
         }
     }
+}
+
+void print_Map(const QMap<QString, QString> *map)
+{
+    QTextStream cout(stdout);
+    if (map && !map->isEmpty())
+    {
+        for (auto it = map->constBegin(); it != map->constEnd(); ++it)
+        {
+            cout << it.key() << ": " << it.value() << Qt::endl;
+        }
+    }
+}
+
+QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& size, int strategy)
+{
+    float accuracy = 0.01;
+    // Инициализация переменных
+    float total = 0;
+    bool flag = false;
+    QMap<QString, QString>* map = new QMap<QString, QString>;
+    if (!map || size.isEmpty() || accuracy >= 100)
+    {
+        return map;
+    }
+
+    // Подсчёт общего количества
+    for (auto value : size)
+    {
+        total += value;
+    }
+
+    // Обработка данных в зависимости от типа
+    if (strategy == 2) // types
+    {
+        if (total == 0)
+        {
+            for (auto it = size.constBegin(); it != size.constEnd(); ++it)
+            {
+                map->insert(QString("*.") + it.key(), QString("0.00 %"));
+            }
+            return map;
+        }
+
+        float others = 0;
+        for (auto it = size.constBegin(); it != size.constEnd(); ++it)
+        {
+            float percent = it.value() / total;
+            if (percent < accuracy)
+            {
+                others += percent;
+                flag = true;
+            }
+            else
+            {
+                map->insert(QString("*.") + it.key(), QString::number(percent * 100, 'f', 2) + " %");
+            }
+        }
+        if (flag)
+        {
+            map->insert("Others", QString::number(others * 100, 'f', 2) + " %");
+        }
+    }
+    else if (strategy == 1) // folders
+    {
+        if (total == 0)
+        {
+            map->insert("Current path", "0.00 %");
+            return map;
+        }
+        for (auto it = size.constBegin(); it != size.constEnd(); ++it)
+        {
+            float percent = it.value() / total;
+            if (percent == 0)
+            {
+                map->insert(it.key(), "0.00 %");
+            }
+            else if (percent * 100 < accuracy)
+            {
+                map->insert(it.key(), QString("<%1 %").arg(QString::number(accuracy)));
+            }
+            else
+            {
+                map->insert(it.key(), QString("%1 %").arg(QString::number(percent * 100, 'f', 2)));
+            }
+        }
+    }
+
+    return map;
 }
 
 int main(int argc, char *argv[])
@@ -28,21 +116,23 @@ int main(int argc, char *argv[])
 
 
 
-    context context(std::make_shared<Folder_CalculationStrategy>());
-    context.fill_Map(info);
-    print_Map(context.get_Map());
+    // Использование контекста с Folder_CalculationStrategy
+    context ctx(std::make_shared<Folder_CalculationStrategy>());
+    ctx.fill_Map(info);
+    qDebug() << "Folders:" << Qt::endl;
+    print_Map(ctx.get_Map());
+    qDebug() << "Folder Percentages:" << Qt::endl;
+    print_Map(CountVolumePercent(ctx.get_Map(), 1));
 
-    qDebug() << Qt::endl;
+    qDebug() << Qt::endl << "Change strategy" << Qt::endl;
 
-    context.set_Strategy(std::make_shared<Type_CalculationStrategy>());
-    context.fill_Map(info);
-    print_Map(context.get_Map());
-
-
-
-
-
-
+    // Изменение стратегии на Type_CalculationStrategy
+    ctx.set_Strategy(std::make_shared<Type_CalculationStrategy>());
+    ctx.fill_Map(info);
+    qDebug() << "Types:" << Qt::endl;
+    print_Map(ctx.get_Map());
+    qDebug() << "Type Percentages:" << Qt::endl;
+    print_Map(CountVolumePercent(ctx.get_Map(), 2));
 
     return a.exec();
 }
