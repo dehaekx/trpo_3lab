@@ -2,7 +2,6 @@
 #define CONTEXT_H
 #include "calculationstrategy.h"
 #include <memory>
-#include <stdexcept>
 
 class context
 {
@@ -15,7 +14,7 @@ public:
     ~context() = default;
 
     void set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy);
-    void fill_Map(const QString& size); // заполнить файл-размер
+    void fill_Map(const QString& size); // заполнить файл и его размер
     const QMap<QString, qint64>& get_Map();
 };
 
