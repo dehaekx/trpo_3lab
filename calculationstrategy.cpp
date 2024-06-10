@@ -3,29 +3,21 @@
 qint64 Folder_CalculationStrategy::CountFolder(const QString &path) const
 {
     qint64 result = 0;
-
     // Make a checking for path is not emphty
-    if (path.isEmpty())
+    if (path.isEmpty() || !QFileInfo(path).isDir())
     {
         return result;
     }
-    if (!QFileInfo(path).isDir())
+    QDir directory(path);
+    QFileInfoList fileInfolist = directory.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
+    QFileInfoList folderInfolist = directory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QFileInfo &fileInfo : fileInfolist)
     {
-        return result;
+        result += fileInfo.size();
     }
-
-    QDir direction = path;
-    QFileInfoList fileInfo = direction.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
-    QFileInfoList folderInfo = direction.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-    for (int i = 0; i < folderInfo.size(); i++)
+    for (const QFileInfo &folderInfo : folderInfolist)
     {
-        QFileInfo folder = folderInfo.at(i);
-        result += CountFolder(folder.filePath());
-    }
-    for (int i = 0; i < fileInfo.size(); i++)
-    {
-        QFileInfo file = fileInfo.at(i);
-        result += file.size();
+        result += CountFolder(folderInfo.filePath());
     }
     return result;
 }
@@ -34,28 +26,24 @@ qint64 Folder_CalculationStrategy::CountFolder(const QString &path) const
 
 void Folder_CalculationStrategy::calculationMethod(const QString &path, QMap<QString, qint64> &cont) const
 {
-    qint64 result = 0;
-
     // Make a checking for path is not emphty
-    if (!QFileInfo(path).isDir())
+    QFileInfo pathinfo(path);
+    if (!pathinfo.isDir())
     {
         return;
     }
-    QDir directon = path;
-    QFileInfoList fileInfo = directon.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
-    QFileInfoList folderInfo = directon.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-
-    for (int i = 0; i < fileInfo.size(); i++)
+    qint64 result = 0;
+    QDir directory(path);
+    QFileInfoList fileInfolist = directory.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
+    QFileInfoList folderInfolist = directory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QFileInfo &fileInfo : fileInfolist)
     {
-        QFileInfo file = fileInfo.at(i);
-        result += file.size();
+        result += fileInfo.size();
     }
     cont.insert(QString("Current path"), result);
-
-    for (int i = 0; i < folderInfo.size(); i++)
+    for (const QFileInfo &folderInfo : folderInfolist)
     {
-        QFileInfo folder = folderInfo.at(i);
-        cont.insert(folder.fileName(), CountFolder(folder.filePath()));
+        cont.insert(folderInfo.fileName(), CountFolder(folderInfo.filePath()));
     }
 }
 
@@ -66,28 +54,20 @@ void Type_CalculationStrategy::calculationMethod(const QString &path, QMap<QStri
 
 void Type_CalculationStrategy::CountFileType(const QString &path, QMap<QString, qint64>& size) const
 {
-    // Make a checking for path is not emphty
-    if(path.isEmpty())
+    // Проверка, что путь не пуст и является директорией
+    if (path.isEmpty() || !QFileInfo(path).isDir())
     {
         return;
     }
-    if(!QFileInfo(path).isDir())
+    QDir directory(path);
+    QFileInfoList fileInfolist = directory.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
+    QFileInfoList folderInfolist = directory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QFileInfo &folderInfo : folderInfolist)
     {
-        return;
+        CountFileType(folderInfo.filePath(), size);
     }
-    QDir direction = path;
-    QFileInfoList fileInfo = direction.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
-    QFileInfoList folderInfo = direction.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-
-    for (int i = 0; i < folderInfo.size(); i++)
+    for (const QFileInfo &fileInfo : fileInfolist)
     {
-        QFileInfo folder = folderInfo.at(i);
-        CountFileType(folder.filePath(), size);
+        size[fileInfo.completeSuffix()] += fileInfo.size();
     }
-    for (int i = 0; i < fileInfo.size(); i++)
-    {
-        QFileInfo file = fileInfo.at(i);
-        size[file.completeSuffix()] += file.size();
-    }
-
 }

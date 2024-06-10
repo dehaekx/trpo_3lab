@@ -4,7 +4,6 @@
 #include <QDir>
 #include <QMap>
 #include <QString>
-#include <iostream>
 #include <QFileInfo>
 #include <QFileInfoList>
 
@@ -22,9 +21,6 @@ public:
     virtual void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const = 0;
 };
 
-
-
-
 class Folder_CalculationStrategy : public CalculationStrategy
 {
 public:
@@ -34,10 +30,6 @@ public:
 private:
     qint64 CountFolder(const QString& path) const;
 };
-
-
-
-
 
 class Type_CalculationStrategy : public CalculationStrategy
 {
