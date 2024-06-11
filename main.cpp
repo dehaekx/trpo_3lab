@@ -7,24 +7,22 @@
 
 void print_Map(const QMap<QString, qint64> &map)
 {
-    QTextStream cout(stdout);
     if (!map.isEmpty())
     {
         for (auto it = map.constBegin(); it != map.constEnd(); ++it)
         {
-            cout << it.key() << ": " << it.value() << Qt::endl;
+            qDebug() << it.key() << ": " << it.value() << Qt::endl;
         }
     }
 }
 
 void print_Map(const QMap<QString, QString> *map)
 {
-    QTextStream cout(stdout);
     if (map && !map->isEmpty())
     {
         for (auto it = map->constBegin(); it != map->constEnd(); ++it)
         {
-            cout << it.key() << ": " << it.value() << Qt::endl;
+            qDebug() << it.key() << ": " << it.value() << Qt::endl;
         }
     }
 }
@@ -36,7 +34,7 @@ QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& size, in
     float total = 0;
     bool flag = false;
     QMap<QString, QString>* map = new QMap<QString, QString>;
-    if (!map || size.isEmpty() || accuracy >= 100)
+    if (!map || size.isEmpty())
     {
         return map;
     }
@@ -94,7 +92,7 @@ QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& size, in
             }
             else if (percent * 100 < accuracy)
             {
-                map->insert(it.key(), QString("<%1 %").arg(QString::number(accuracy)));
+                map->insert(it.key(), QString("%1 %").arg(QString::number(accuracy)));
             }
             else
             {
@@ -112,11 +110,20 @@ int main(int argc, char *argv[])
     QString currentReposiroty = QDir::currentPath().section("/", 0, -2);
     qDebug() << "Direction: " << currentReposiroty << Qt::endl;
     //qDebug() << currentReposiroty << Qt:: endl;
-    QString info = currentReposiroty + "/tests";
+    QString info = currentReposiroty + "/tests/test4_repository";
+
+    // /tests                  - не пустая + содержит вложения
+    // /tests/test1_repository - содержит папки
+    // /tests/test2_repository - пустая
+    // /tests/test3_repository - не пустая, но с файлами, имеющие развер 0
+    // /tests/test4_repository - содержит вложения
 
 
 
-    // Использование контекста с Folder_CalculationStrategy
+
+
+
+    // Использование контекста со стратегией Folder_CalculationStrategy
     context ctx(std::make_shared<Folder_CalculationStrategy>());
     ctx.fill_Map(info);
     qDebug() << "Folders:" << Qt::endl;
