@@ -16,7 +16,7 @@ const QMap<QString, qint64> & context::get_Map()
     return map;
 }
 
-void context::fill_Map(const QString& size)
+void context::fill_Map(const QString& path)
 {
-    this->strategy_->calculationMethod(size, map);
+    this->strategy_->calculationMethod(path, map);
 }
