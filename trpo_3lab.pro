@@ -9,7 +9,9 @@ CONFIG += c++17 cmdline
 SOURCES += \
         calculationstrategy.cpp \
         context.cpp \
-        main.cpp
+        folder_strategy.cpp \
+        main.cpp \
+        type_strategy.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -18,4 +20,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     calculationstrategy.h \
-    context.h
+    context.h \
+    folder_strategy.h \
+    type_strategy.h

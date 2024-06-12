@@ -21,24 +21,24 @@ public:
     virtual void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const = 0;
 };
 
-class Folder_CalculationStrategy : public CalculationStrategy
-{
-public:
-    ~Folder_CalculationStrategy() = default;
-    void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const override;
+// class Folder_CalculationStrategy : public CalculationStrategy
+// {
+// public:
+//     ~Folder_CalculationStrategy() = default;
+//     void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const override;
 
-private:
-    qint64 CountFolder(const QString& path) const;
-};
+// private:
+//     qint64 CountFolder(const QString& path) const;
+// };
 
-class Type_CalculationStrategy : public CalculationStrategy
-{
-public:
-    ~Type_CalculationStrategy() = default;
-    void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const override;
+// class Type_CalculationStrategy : public CalculationStrategy
+// {
+// public:
+//     ~Type_CalculationStrategy() = default;
+//     void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const override;
 
-private:
-    void CountFileType(const QString &path, QMap<QString, qint64>& size) const;
-};
+// private:
+//     void CountFileType(const QString &path, QMap<QString, qint64>& size) const;
+// };
 
 #endif // CALCULATIONSTRATEGY_H
