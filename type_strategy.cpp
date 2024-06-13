@@ -5,9 +5,9 @@ void Type_CalculationStrategy::calculationMethod(const QString &path, QMap<QStri
     CountFileType(path, cont);
 }
 
-void Type_CalculationStrategy::CountFileType(const QString &path, QMap<QString, qint64>& size) const
+void Type_CalculationStrategy::CountFileType(const QString &path, QMap<QString, qint64>& cont) const
 {
-    // Проверка, что путь не пуст и является директорией
+    // Проверка, что путь не пуст или не является директорией
     if (path.isEmpty() || !QFileInfo(path).isDir())
     {
         return;
@@ -17,11 +17,11 @@ void Type_CalculationStrategy::CountFileType(const QString &path, QMap<QString, 
     QFileInfoList folderInfolist = directory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
     for (const QFileInfo &folderInfo : folderInfolist)
     {
-        CountFileType(folderInfo.filePath(), size);
+        CountFileType(folderInfo.filePath(), cont);
     }
     for (const QFileInfo &fileInfo : fileInfolist)
     {
-        size[fileInfo.completeSuffix()] += fileInfo.size();
+        cont[fileInfo.completeSuffix()] += fileInfo.size();
     }
 }
 
