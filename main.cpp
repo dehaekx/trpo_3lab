@@ -8,7 +8,7 @@
 
 void print_Map(const QMap<QString, qint64> &map);
 void print_Map(const QMap<QString, QString> *map);
-QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& size, int strategy);
+//QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& size, int strategy);
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     qDebug() << "Folders:" << Qt::endl;
     print_Map(ctx.get_Map());
     qDebug() << "Folder Percentages:" << Qt::endl;
-    print_Map(CountVolumePercent(ctx.get_Map(), 1));
+    print_Map(ctx.CountVolumePercent(ctx.get_Map(), 1));
 
     qDebug() << Qt::endl << "Change strategy" << Qt::endl;
 
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     qDebug() << "Types:" << Qt::endl;
     print_Map(ctx.get_Map());
     qDebug() << "Type Percentages:" << Qt::endl;
-    print_Map(CountVolumePercent(ctx.get_Map(), 2));
+    print_Map(ctx.CountVolumePercent(ctx.get_Map(), 2));
 
     return a.exec();
 }
@@ -72,79 +72,79 @@ void print_Map(const QMap<QString, QString> *map)
 }
 
 
-QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& cont, int strategy)
-{
-    float accuracy = 0.01;
-    // Инициализация переменных
-    float total = 0;
-    bool flag = false;
-    QMap<QString, QString>* map = new QMap<QString, QString>;
-    if (!map || cont.isEmpty())
-    {
-        return map;
-    }
+// QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& cont, int strategy)
+// {
+//     float accuracy = 0.01;
+//     // Инициализация переменных
+//     float total = 0;
+//     bool flag = false;
+//     QMap<QString, QString>* map = new QMap<QString, QString>;
+//     if (!map || cont.isEmpty())
+//     {
+//         return map;
+//     }
 
-    // Подсчёт общего количества
-    for (auto value : cont)
-    {
-        total += value;
-    }
+//     // Подсчёт общего количества
+//     for (auto value : cont)
+//     {
+//         total += value;
+//     }
 
-    // Обработка данных в зависимости от типа
-    if (strategy == 2) // types
-    {
-        if (total == 0)
-        {
-            for (auto it = cont.constBegin(); it != cont.constEnd(); ++it)
-            {
-                map->insert(QString(".") + it.key(), QString("0.00 %"));
-            }
-            return map;
-        }
+//     // Обработка данных в зависимости от типа
+//     if (strategy == 2) // types
+//     {
+//         if (total == 0)
+//         {
+//             for (auto it = cont.constBegin(); it != cont.constEnd(); ++it)
+//             {
+//                 map->insert(QString(".") + it.key(), QString("0.00 %"));
+//             }
+//             return map;
+//         }
 
-        float others = 0;
-        for (auto it = cont.constBegin(); it != cont.constEnd(); ++it)
-        {
-            float percent = it.value() / total;
-            if (percent < accuracy)
-            {
-                others += percent;
-                flag = true;
-            }
-            else
-            {
-                map->insert(QString(".") + it.key(), QString::number(percent * 100, 'f', 2) + " %");
-            }
-        }
-        if (flag)
-        {
-            map->insert("Others", QString::number(others * 100, 'f', 2) + " %");
-        }
-    }
-    else if (strategy == 1) // folders
-    {
-        if (total == 0)
-        {
-            map->insert("Current path", "0.00 %");
-            return map;
-        }
-        for (auto it = cont.constBegin(); it != cont.constEnd(); ++it)
-        {
-            float percent = it.value() / total;
-            if (percent == 0)
-            {
-                map->insert(it.key(), "0.00 %");
-            }
-            else if (percent < accuracy)
-            {
-                map->insert(it.key(), QString("%1 %").arg(QString::number(accuracy)));
-            }
-            else
-            {
-                map->insert(it.key(), QString("%1 %").arg(QString::number(percent * 100, 'f', 2)));
-            }
-        }
-    }
+//         float others = 0;
+//         for (auto it = cont.constBegin(); it != cont.constEnd(); ++it)
+//         {
+//             float percent = it.value() / total;
+//             if (percent < accuracy)
+//             {
+//                 others += percent;
+//                 flag = true;
+//             }
+//             else
+//             {
+//                 map->insert(QString(".") + it.key(), QString::number(percent * 100, 'f', 2) + " %");
+//             }
+//         }
+//         if (flag)
+//         {
+//             map->insert("Others", QString::number(others * 100, 'f', 2) + " %");
+//         }
+//     }
+//     else if (strategy == 1) // folders
+//     {
+//         if (total == 0)
+//         {
+//             map->insert("Current path", "0.00 %");
+//             return map;
+//         }
+//         for (auto it = cont.constBegin(); it != cont.constEnd(); ++it)
+//         {
+//             float percent = it.value() / total;
+//             if (percent == 0)
+//             {
+//                 map->insert(it.key(), "0.00 %");
+//             }
+//             else if (percent < accuracy)
+//             {
+//                 map->insert(it.key(), QString("%1 %").arg(QString::number(accuracy)));
+//             }
+//             else
+//             {
+//                 map->insert(it.key(), QString("%1 %").arg(QString::number(percent * 100, 'f', 2)));
+//             }
+//         }
+//     }
 
-    return map;
-}
+//     return map;
+// }
