@@ -72,6 +72,41 @@ void print_Map(const QMap<QString, QString> *map)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& cont, int strategy)
 // {
 //     float accuracy = 0.01;

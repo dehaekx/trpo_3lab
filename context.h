@@ -17,7 +17,7 @@ public:
     void fill_Map(const QString& path); // заполнить файл и его размер
     const QMap<QString, qint64>& get_Map();
 
-    QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& cont, int strategy);
+    QMap<QString, QString>* CountVolumePercent(const QMap<QString, qint64>& cont, int strategy, float accuracy = 0.01);
 };
 
 #endif // CONTEXT_H

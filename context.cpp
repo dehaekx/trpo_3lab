@@ -3,12 +3,22 @@
 
 context::context(const std::shared_ptr<CalculationStrategy> &strategy)
 {
-    this->strategy_ = strategy;
+    if (strategy != nullptr)
+    {
+        this->strategy_ = strategy;
+    }
+    else
+    {
+        throw std::runtime_error("ERROR strategy is nullptr");
+    }
 }
 
 void context::set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy)
 {
-    this->strategy_ = strategy;
+    if (strategy != nullptr)
+    {
+        this->strategy_ = strategy;
+    }
 }
 
 const QMap<QString, qint64> & context::get_Map()
@@ -22,9 +32,8 @@ void context::fill_Map(const QString& path)
 }
 
 
-QMap<QString, QString>* context::CountVolumePercent(const QMap<QString, qint64>& cont, int strategy)
+QMap<QString, QString>* context::CountVolumePercent(const QMap<QString, qint64>& cont, int strategy, float accuracy)
 {
-    float accuracy = 0.01;
     // Инициализация переменных
     float total = 0;
     bool flag = false;
