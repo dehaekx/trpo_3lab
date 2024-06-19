@@ -1,5 +1,5 @@
 QT = core
-
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets # сделал так, чтобы подключились библиотеки QMainWindow и тд
 CONFIG += c++17 cmdline
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -9,8 +9,10 @@ CONFIG += c++17 cmdline
 SOURCES += \
         calculationstrategy.cpp \
         context.cpp \
+        fileexplorermodel.cpp \
         folder_strategy.cpp \
         main.cpp \
+        mainwindow.cpp \
         type_strategy.cpp
 
 # Default rules for deployment.
@@ -21,5 +23,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     calculationstrategy.h \
     context.h \
+    fileexplorermodel.h \
     folder_strategy.h \
+    mainwindow.h \
     type_strategy.h
