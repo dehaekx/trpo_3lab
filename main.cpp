@@ -1,10 +1,13 @@
 #include <QCoreApplication>
+#include <QApplication>
 #include <QDebug>
 #include <QDir>
 #include <QMap>
 #include "context.h"
 #include "folder_strategy.h"
 #include "type_strategy.h"
+#include "mainwindow.h"
+
 
 void print_Map(const QMap<QString, qint64> &map);
 void print_Map(const QMap<QString, QString> *map);
@@ -12,7 +15,7 @@ void print_Map(const QMap<QString, QString> *map);
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
     QString currentReposiroty = QDir::currentPath().section("/", 0, -2);
     qDebug() << "Direction: " << currentReposiroty << Qt::endl;
     //qDebug() << currentReposiroty << Qt:: endl;
@@ -42,6 +45,9 @@ int main(int argc, char *argv[])
     qDebug() << "Type Percentages:" << Qt::endl;
     print_Map(ctx.CountVolumePercent(ctx.get_Map(), 2));
 
+
+    MainWindow w;
+    w.show();
     return a.exec();
 }
 
