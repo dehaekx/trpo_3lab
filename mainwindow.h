@@ -8,6 +8,9 @@
 #include <QTreeView>
 #include <QTableView>
 
+#include "context.h"
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -23,6 +26,7 @@ private:
     QFileSystemModel *dirModel;
     QTreeView *treeView;
     QTableView *tableView;
+    context *context;
 };
 
 #endif // MAINWINDOW_H
