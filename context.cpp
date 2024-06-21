@@ -26,7 +26,7 @@ const QMap<QString, qint64> & context::get_Map()
     return map;
 }
 
-void context::fill_Map(const QString& path)
+void context::runStrategy(const QString& path)
 {
     this->strategy_->calculationMethod(path, map);
 }

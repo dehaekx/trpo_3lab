@@ -24,8 +24,8 @@ public:
 private:
     QFileSystemModel *fileModel;
     QFileSystemModel *dirModel;
-    QTreeView *treeView;
-    QTableView *tableView;
+    QTreeView *treeView; // • QTreeView - отображение данных в виде дерева (иерархического списка).
+    QTableView *tableView; // • QTableView - отображение данных в виде таблицы;
     context *context;
 };
 

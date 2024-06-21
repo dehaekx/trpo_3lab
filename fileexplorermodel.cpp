@@ -1,3 +1,6 @@
 #include "fileexplorermodel.h"
 
-fileexplorermodel::fileexplorermodel() {}
+FileExplorerModel::FileExplorerModel(QObject *parent)
+{
+
+}
