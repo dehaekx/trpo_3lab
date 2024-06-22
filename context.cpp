@@ -1,7 +1,7 @@
 #include "context.h"
 
 
-context::context(const std::shared_ptr<CalculationStrategy> &strategy)
+Context::Context(const std::shared_ptr<CalculationStrategy> &strategy)
 {
     if (strategy != nullptr)
     {
@@ -13,7 +13,7 @@ context::context(const std::shared_ptr<CalculationStrategy> &strategy)
     }
 }
 
-void context::set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy)
+void Context::set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy)
 {
     if (strategy != nullptr)
     {
@@ -21,18 +21,18 @@ void context::set_Strategy(const std::shared_ptr<CalculationStrategy>& strategy)
     }
 }
 
-const QMap<QString, qint64> & context::get_Map()
+const QMap<QString, qint64> & Context::get_Map()
 {
     return map;
 }
 
-void context::runStrategy(const QString& path)
+void Context::runStrategy(const QString& path)
 {
     this->strategy_->calculationMethod(path, map);
 }
 
 
-QMap<QString, QString>* context::CountVolumePercent(const QMap<QString, qint64>& cont, int strategy, float accuracy)
+QMap<QString, QString>* Context::CountVolumePercent(const QMap<QString, qint64>& cont, int strategy, float accuracy)
 {
     // Инициализация переменных
     float total = 0;
