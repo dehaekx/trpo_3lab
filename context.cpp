@@ -31,6 +31,15 @@ void Context::runStrategy(const QString& path)
     this->strategy_->calculationMethod(path, map);
 }
 
+int Context::getCurrentStrategy() const
+{
+    // Folder_CalculationStrategy имеет идентификатор 1, а Type_CalculationStrategy  2
+    if (std::dynamic_pointer_cast<Folder_CalculationStrategy>(strategy_)) // if приведение успешно, возвращается shared_ptr нужного типа, если нет nullptr
+        return 1;
+    else if (std::dynamic_pointer_cast<Type_CalculationStrategy>(strategy_))
+        return 2;
+    return 0;
+}
 
 QMap<QString, QString>* Context::CountVolumePercent(const QMap<QString, qint64>& cont, int strategy, float accuracy)
 {
