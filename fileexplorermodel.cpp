@@ -30,10 +30,13 @@ QVariant FileExplorerModel::headerData(int section, Qt::Orientation orientation,
     {
         return section;
     }
-    if  (section == 0)
-        return QString("NAME");
-    else if (section == 1)
-        return QString("PERCENT");
+    switch (section)
+    {
+        case 0:
+            return QString("NAME");
+        case 1:
+            return QString("PERCENT");
+    }
     return QVariant();
 }
 
@@ -43,23 +46,29 @@ QVariant FileExplorerModel::data(const QModelIndex &index, int role) const
     {
         return QVariant();
     }
-    QMapIterator<QString, QString> i(map);
-    // Перемещение итератора на нужную позицию
-    int k = 0;
-    i.next();
-    while (i.hasNext() && k < index.row())
+    // Получение списка ключей из карты
+    QList<QString> keys = map.keys();
+
+    // Проверка валидности индекса строки
+    if (index.row() >= keys.size())
     {
-        i.next();
-        k++;
+        return QVariant();// если индекс строки больше или равен количеству ключей
     }
+
+    // Получение ключа для текущей строки
+    QString key = keys.at(index.row());
+
+    // Возвращение ключа или значения в зависимости от колонки
     if (index.column() == 0)
     {
-        return i.key();
+        return key;
     }
     else if (index.column() == 1)
     {
-        return i.value();
+       return map.value(key);
     }
+
+    return QVariant();
 }
 
 void FileExplorerModel::updmapSlot(const QMap<QString, QString>* map_)
