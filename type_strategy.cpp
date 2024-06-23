@@ -2,6 +2,7 @@
 
 void Type_CalculationStrategy::calculationMethod(const QString &path, QMap<QString, qint64> &cont) const
 {
+    cont.clear();
     CountFileType(path, cont);
 }
 

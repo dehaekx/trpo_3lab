@@ -41,13 +41,12 @@ MainWindow::MainWindow(QWidget *parent, Context *context_)
     treeView->setModel(dirModel); // Устанавливаем модель дерева
     treeView->expandAll(); // Раскрываем все директории
 
-    // Создаем QSplitter для разделения окна на две части // для разделения представлений
-    QSplitter *splitter = new QSplitter(parent);
-
     // Создаем таблицу и устанавливаем модель файлов
     tableView = new QTableView;
     tableView->setModel(fileModel); // Устанавливаем модель таблицы
 
+    // Создаем QSplitter для разделения окна на две части // для разделения представлений
+    QSplitter *splitter = new QSplitter(parent);
     // Добавляем дерево и таблицу в QSplitter
     splitter->addWidget(treeView);
     splitter->addWidget(tableView);
@@ -63,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent, Context *context_)
 
     QItemSelectionModel *selectionModel = treeView->selectionModel(); // Получаем модель выбора для дерева, следит при клике, что я выбираю
 
-    treeView->header()->resizeSection(0, 200); // Устанавливаем размер первого столбца в дереве
+    treeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents); // Устанавливаем размер первого столбца в дереве
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     // Подключаем сигнал изменения выбора к слоту on_selectionChangedSlot
     //Выполняем соединения слота и сигнала который вызывается когда осуществляется выбор элемента в TreeView
@@ -110,14 +109,13 @@ void MainWindow::on_selectionChangedSlot(const QItemSelection &selected, const Q
         QModelIndex ix =  indexs.constFirst(); // Получаем первый выбранный индекс
         filePath = dirModel->filePath(ix);  // Получаем путь к файлу
         this->statusBar()->showMessage("Выбранный путь : " + dirModel->filePath(indexs.constFirst())); // Обновляем сообщение строки состояния
-        context->runStrategy(dirModel->filePath(indexs.constFirst()));
+        context->runStrategy(dirModel->filePath(indexs.constFirst())); // путь считает правильно
         //qDebug() << dirModel->filePath(indexs.constFirst()) << Qt::endl;
-        emit upd_signal(context->CountVolumePercent(context->get_Map(), 1));
-        //printMap(context->CountVolumePercent(context->get_Map(), 1));
+        emit update(context->CountVolumePercent(context->get_Map(), 1));
+        print_Map(context->CountVolumePercent(context->get_Map(), 1));
         // нужно заимитить подсчет процентов
+
     }
-
-
 }
 
 void MainWindow::on_comboBoxSlot(const QString &str)
@@ -126,8 +124,8 @@ void MainWindow::on_comboBoxSlot(const QString &str)
         return;
         //context->set_Strategy(std::make_shared<Folder_CalculationStrategy>());
     if(str == "File strategy")
-        return;
         //context->set_Strategy(std::make_shared<Type_CalculationStrategy>());
+        return;
 }
 
 

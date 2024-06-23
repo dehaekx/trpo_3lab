@@ -24,6 +24,7 @@ qint64 Folder_CalculationStrategy::CountFolder(const QString &path) const
 
 void Folder_CalculationStrategy::calculationMethod(const QString &path, QMap<QString, qint64> &cont) const
 {
+    cont.clear();
     // Make a checking for path is not emphty
     QFileInfo pathinfo(path);
     if (!pathinfo.isDir())

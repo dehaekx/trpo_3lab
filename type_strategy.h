@@ -9,7 +9,7 @@ public:
     void calculationMethod(const QString &path, QMap<QString, qint64> &cont) const override;
 
 private:
-    void CountFileType(const QString &path, QMap<QString, qint64>& size) const;
+    void CountFileType(const QString &path, QMap<QString, qint64>& cont) const;
 };
 
 #endif // TYPE_STRATEGY_H
