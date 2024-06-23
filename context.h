@@ -2,6 +2,8 @@
 #define CONTEXT_H
 #include "calculationstrategy.h"
 #include <memory>
+#include "folder_strategy.h"
+#include "type_strategy.h"
 
 class Context
 {
