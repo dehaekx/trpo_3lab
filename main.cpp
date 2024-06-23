@@ -15,10 +15,10 @@ void print_Map(const QMap<QString, QString> *map);
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QString currentReposiroty = QDir::currentPath().section("/", 0, -2);
-    qDebug() << "Direction: " << currentReposiroty << Qt::endl;
+    //QString currentReposiroty = QDir::currentPath().section("/", 0, -2);
+    //qDebug() << "Direction: " << currentReposiroty << Qt::endl;
     //qDebug() << currentReposiroty << Qt:: endl;
-    QString info = currentReposiroty + "/tests";
+    //QString info = currentReposiroty + "/tests";
 
     // /tests                  - не пустая + содержит вложения
     // /tests/test1_repository - содержит папки
@@ -49,6 +49,14 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+
+
+
+
+
+
+
 
 
 
