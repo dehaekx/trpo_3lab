@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent, Context *context_)
     // Создаем таблицу и устанавливаем модель файлов
     tableView = new QTableView;
     tableView->setModel(fileModel); // Устанавливаем модель таблицы
+    tableView->resizeColumnToContents(100);
 
     // Создаем QSplitter для разделения окна на две части // для разделения представлений
     QSplitter *splitter = new QSplitter(parent);
@@ -62,8 +63,8 @@ MainWindow::MainWindow(QWidget *parent, Context *context_)
 
     QItemSelectionModel *selectionModel = treeView->selectionModel(); // Получаем модель выбора для дерева, следит при клике, что я выбираю
 
-    treeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents); // Устанавливаем размер первого столбца в дереве
-    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    treeView->header()->resizeSection(0, 200); // Устанавливаем размер первого столбца в дереве
+    //tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     // Подключаем сигнал изменения выбора к слоту on_selectionChangedSlot
     //Выполняем соединения слота и сигнала который вызывается когда осуществляется выбор элемента в TreeView
 
@@ -109,6 +110,7 @@ void MainWindow::on_selectionChangedSlot(const QItemSelection &selected, const Q
         QModelIndex ix =  indexs.constFirst(); // Получаем первый выбранный индекс
         filePath = dirModel->filePath(ix);  // Получаем путь к файлу
         this->statusBar()->showMessage("Выбранный путь : " + dirModel->filePath(indexs.constFirst())); // Обновляем сообщение строки состояния
+
         context->runStrategy(dirModel->filePath(indexs.constFirst())); // путь считает правильно
         //qDebug() << dirModel->filePath(indexs.constFirst()) << Qt::endl;
         emit update(context->CountVolumePercent(context->get_Map(), 1));
@@ -121,11 +123,9 @@ void MainWindow::on_selectionChangedSlot(const QItemSelection &selected, const Q
 void MainWindow::on_comboBoxSlot(const QString &str)
 {
     if(str == "Folder strategy")
-        return;
-        //context->set_Strategy(std::make_shared<Folder_CalculationStrategy>());
+        context->set_Strategy(std::make_shared<Folder_CalculationStrategy>());
     if(str == "File strategy")
-        //context->set_Strategy(std::make_shared<Type_CalculationStrategy>());
-        return;
+        context->set_Strategy(std::make_shared<Type_CalculationStrategy>());
 }
 
 
