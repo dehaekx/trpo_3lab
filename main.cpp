@@ -6,8 +6,7 @@
 #include "context.h"
 #include "folder_strategy.h"
 #include "type_strategy.h"
-//#include "mainwindow.h"
-
+#include "mainwindow.h"
 
 void print_Map(const QMap<QString, qint64> &map);
 void print_Map(const QMap<QString, QString> *map);
@@ -28,26 +27,26 @@ int main(int argc, char *argv[])
     // /tests/test4_repository - содержит вложения
 
     // Использование контекста со стратегией Folder_CalculationStrategy
-    context ctx(std::make_shared<Folder_CalculationStrategy>());
-    ctx.runStrategy(info);
-    qDebug() << "Folders:" << Qt::endl;
-    print_Map(ctx.get_Map());
-    qDebug() << "Folder Percentages:" << Qt::endl;
-    print_Map(ctx.CountVolumePercent(ctx.get_Map(), 1));
+    // Context ctx(std::make_shared<Folder_CalculationStrategy>());
+    // ctx.runStrategy(info);
+    // qDebug() << "Folders:" << Qt::endl;
+    // print_Map(ctx.get_Map());
+    // qDebug() << "Folder Percentages:" << Qt::endl;
+    // print_Map(ctx.CountVolumePercent(ctx.get_Map(), 1));
 
-    qDebug() << Qt::endl << "Change strategy" << Qt::endl;
+    // qDebug() << Qt::endl << "Change strategy" << Qt::endl;
 
     // Изменение стратегии на Type_CalculationStrategy
-    ctx.set_Strategy(std::make_shared<Type_CalculationStrategy>());
-    ctx.runStrategy(info);
-    qDebug() << "Types:" << Qt::endl;
-    print_Map(ctx.get_Map());
-    qDebug() << "Type Percentages:" << Qt::endl;
-    print_Map(ctx.CountVolumePercent(ctx.get_Map(), 2));
+    // ctx.set_Strategy(std::make_shared<Type_CalculationStrategy>());
+    // ctx.runStrategy(info);
+    // qDebug() << "Types:" << Qt::endl;
+    // print_Map(ctx.get_Map());
+    // qDebug() << "Type Percentages:" << Qt::endl;
+    // print_Map(ctx.CountVolumePercent(ctx.get_Map(), 2));
 
-
-    // MainWindow w;
-    // w.show();
+    Context ctx(std::make_shared<Folder_CalculationStrategy>());
+    MainWindow w(0, &ctx);
+    w.show();
     return a.exec();
 }
 
