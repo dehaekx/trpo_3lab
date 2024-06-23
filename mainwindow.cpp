@@ -28,13 +28,13 @@ MainWindow::MainWindow(QWidget *parent, Context *context_)
     dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     dirModel->setRootPath(homePath); // Устанавливаем корневой путь модели
 
-    // Создаем и настраиваем модель файловой системы для файлов // ЭТУ МОДЕЛЬ НУЖНО СДЕЛАТЬ
+    // Создаем и настраиваем модель файловой системы для файлов
     fileModel = new FileExplorerModel(this, context->CountVolumePercent(context->get_Map(), 1));
 
     // Для выпадающего списка выбора стратегии:
     comboBox = new QComboBox(parent);
-    comboBox->addItem("Folders strategy");
-    comboBox->addItem("Type strategy");
+    comboBox->addItem("FOLDER");
+    comboBox->addItem("TYPE");
     comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
     treeView = new QTreeView();
@@ -113,19 +113,27 @@ void MainWindow::on_selectionChangedSlot(const QItemSelection &selected, const Q
 
         context->runStrategy(dirModel->filePath(indexs.constFirst())); // путь считает правильно
         //qDebug() << dirModel->filePath(indexs.constFirst()) << Qt::endl;
-        emit update(context->CountVolumePercent(context->get_Map(), 1));
-        print_Map(context->CountVolumePercent(context->get_Map(), 1));
-        // нужно заимитить подсчет процентов
+
+        auto currentStrategy = context->getCurrentStrategy();
+        qDebug() << "currentStrategy: " << currentStrategy;
+        emit update(context->CountVolumePercent(context->get_Map(), currentStrategy));
+        print_Map(context->CountVolumePercent(context->get_Map(), currentStrategy));
 
     }
 }
 
 void MainWindow::on_comboBoxSlot(const QString &str)
 {
-    if(str == "Folder strategy")
+    if(str == "FOLDER")
+    {
+        qDebug() << "Folder strategy" << Qt::endl;
         context->set_Strategy(std::make_shared<Folder_CalculationStrategy>());
-    if(str == "File strategy")
+    }
+    if(str == "TYPE")
+    {
+        qDebug() << "Type strategy" << Qt::endl;
         context->set_Strategy(std::make_shared<Type_CalculationStrategy>());
+    }
 }
 
 
