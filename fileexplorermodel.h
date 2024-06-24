@@ -15,8 +15,8 @@ public slots:
     void updmapSlot(const QMap<QString, QString>* map_);
 public:
     FileExplorerModel(QObject *parent = nullptr, QMap<QString, QString>* map_ = nullptr);
-    QModelIndex index(int row, int column, const QModelIndex &parent) const override;
-    QModelIndex parent(const QModelIndex &child) const override;
+    //QModelIndex index(int row, int column, const QModelIndex &parent) const override;
+    //QModelIndex parent(const QModelIndex &child) const override;
     int rowCount(const QModelIndex &parent) const override;
     int columnCount(const QModelIndex &parent) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
