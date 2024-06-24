@@ -117,7 +117,7 @@ void MainWindow::on_selectionChangedSlot(const QItemSelection &selected, const Q
         auto currentStrategy = context->getCurrentStrategy();
         qDebug() << "currentStrategy: " << currentStrategy;
         emit update(context->CountVolumePercent(context->get_Map(), currentStrategy));
-        print_Map(context->CountVolumePercent(context->get_Map(), currentStrategy));
+        //print_Map(context->CountVolumePercent(context->get_Map(), currentStrategy));
 
     }
 }

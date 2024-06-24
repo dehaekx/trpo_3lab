@@ -29,17 +29,6 @@ private:
     QTableView *tableView; // • QTableView - отображение данных в виде таблицы;
     Context *context;
     QComboBox *comboBox;
-
-    void print_Map(const QMap<QString, QString> *map)
-    {
-        if (map && !map->isEmpty())
-        {
-            for (auto it = map->constBegin(); it != map->constEnd(); ++it)
-            {
-                qDebug() << it.key() << ": " << it.value() << Qt::endl;
-            }
-        }
-    }
 };
 
 #endif // MAINWINDOW_H
